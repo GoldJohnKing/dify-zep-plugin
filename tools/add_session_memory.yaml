@@ -54,7 +54,7 @@ parameters:
     llm_description: Whether to return relevant memory context after adding the message
     form: llm
   - name: ignore_roles
-    type: multi-select
+    type: dynamic-select
     required: false
     options:
       - value: user
