@@ -26,12 +26,17 @@ class SearchUserGraphTool(Tool):
                 scope="nodes",
             ).nodes
 
-            facts_list = list(
-                map(
-                    lambda edge: f"  - {edge.fact} ({datetime.strptime(edge.created_at, '%Y-%m-%dT%H:%M:%S.%fZ').strftime('%Y-%m-%d %H:%M:%S')} - {datetime.strptime(edge.invalid_at, '%Y-%m-%dT%H:%M:%S.%fZ').strftime('%Y-%m-%d %H:%M:%S') if edge.invalid_at else 'present'})",
-                    graph_edges or [],
+            facts_list = []
+            for edge in graph_edges or []:
+                created_at = datetime.fromisoformat(edge.created_at.replace("Z", ""))
+                if edge.invalid_at:
+                    invalid_at_dt = datetime.fromisoformat(edge.invalid_at.replace("Z", ""))
+                    invalid_at = invalid_at_dt.strftime("%Y-%m-%d %H:%M:%S")
+                else:
+                    invalid_at = "present"
+                facts_list.append(
+                    f"  - {edge.fact} ({created_at.strftime('%Y-%m-%d %H:%M:%S')} - {invalid_at})"
                 )
-            )
             facts_str = ""
             if len(facts_list):
                 facts_str = f"""

@@ -26,6 +26,8 @@ tools:
   - tools/get_session_memory.yaml
   - tools/add_session_memory.yaml
   - tools/search_user_graph.yaml
+  - tools/delete_session.yaml
+  - tools/get_session.yaml
 
 extra:
   python:

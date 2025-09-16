@@ -44,6 +44,43 @@ parameters:
       en_US: The role of the message sender (user/assistant)
     llm_description: The role of the message sender (user/assistant)
     form: llm
+  - name: return_context
+    type: boolean
+    required: false
+    label:
+      en_US: Return Context
+    human_description:
+      en_US: Whether to return relevant memory context after adding the message
+    llm_description: Whether to return relevant memory context after adding the message
+    form: llm
+  - name: ignore_roles
+    type: multi-select
+    required: false
+    options:
+      - value: user
+        label:
+          en_US: User
+      - value: assistant
+        label:
+          en_US: Assistant
+      - value: system
+        label:
+          en_US: System
+      - value: norole
+        label:
+          en_US: No Role
+      - value: tool
+        label:
+          en_US: Tool
+      - value: function
+        label:
+          en_US: Function
+    label:
+      en_US: Ignore Roles
+    human_description:
+      en_US: Roles to ignore when adding the message to the graph
+    llm_description: Roles to ignore when adding the message to the graph
+    form: llm
 
 extra:
   python:

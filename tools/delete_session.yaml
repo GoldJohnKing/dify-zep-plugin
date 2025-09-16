@@ -1,0 +1,25 @@
+identity:
+  name: delete_session
+  author: obadakhalili
+  label:
+    en_US: Delete session
+
+description:
+  human:
+    en_US: Delete a session and its memory from Zep
+  llm: Delete a session and its memory from Zep
+
+parameters:
+  - name: session_id
+    type: string
+    required: true
+    label:
+      en_US: Session ID
+    human_description:
+      en_US: The ID of the session to delete
+    llm_description: The ID of the session to delete
+    form: llm
+
+extra:
+  python:
+    source: tools/delete_session.py

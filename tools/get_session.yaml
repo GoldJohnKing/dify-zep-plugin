@@ -1,0 +1,25 @@
+identity:
+  name: get_session
+  author: obadakhalili
+  label:
+    en_US: Get session
+
+description:
+  human:
+    en_US: Retrieve details about a session
+  llm: Retrieve details about a session
+
+parameters:
+  - name: session_id
+    type: string
+    required: true
+    label:
+      en_US: Session ID
+    human_description:
+      en_US: The ID of the session to retrieve
+    llm_description: The ID of the session to retrieve
+    form: llm
+
+extra:
+  python:
+    source: tools/get_session.py

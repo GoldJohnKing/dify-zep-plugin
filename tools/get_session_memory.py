@@ -14,10 +14,21 @@ class GetSessionMemoryTool(Tool):
             api_key = self.runtime.credentials["zep_api_key"]
             client = Zep(api_key=api_key)
 
+            lastn = tool_parameters.get("lastn")
+            if isinstance(lastn, str) and lastn.isdigit():
+                lastn = int(lastn)
+
+            min_rating = tool_parameters.get("min_rating")
+            if isinstance(min_rating, str):
+                try:
+                    min_rating = float(min_rating)
+                except ValueError:
+                    min_rating = None
+
             memory = client.memory.get(
                 session_id=tool_parameters["session_id"],
-                lastn=tool_parameters.get("lastn"),
-                min_rating=tool_parameters.get("min_rating"),
+                lastn=lastn,
+                min_rating=min_rating,
             )
 
             yield self.create_json_message(
