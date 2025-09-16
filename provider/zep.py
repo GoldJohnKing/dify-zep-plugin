@@ -11,9 +11,11 @@ class ZepProvider(ToolProvider):
         api_key = credentials.get("zep_api_key")
         if not api_key:
             raise ToolProviderCredentialValidationError("Missing 'zep_api_key'")
+        api_url = credentials.get("zep_api_url")
+        base_url = f"{api_url}/api/v2" if api_url else None
 
         try:
-            client = Zep(api_key=api_key)
+            client = Zep(api_key=api_key, base_url=base_url)
             # Make a lightweight request to verify the API key without assuming
             # any specific sessions exist.
             client.memory.list_sessions(page_size=1)

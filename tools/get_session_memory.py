@@ -12,7 +12,9 @@ class GetSessionMemoryTool(Tool):
     def _invoke(self, tool_parameters: dict[str, Any]) -> Generator[ToolInvokeMessage]:
         try:
             api_key = self.runtime.credentials["zep_api_key"]
-            client = Zep(api_key=api_key)
+            api_url = self.runtime.credentials.get("zep_api_url")
+            base_url = f"{api_url}/api/v2" if api_url else None
+            client = Zep(api_key=api_key, base_url=base_url)
 
             lastn = tool_parameters.get("lastn")
             if isinstance(lastn, str) and lastn.isdigit():

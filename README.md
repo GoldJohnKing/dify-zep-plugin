@@ -9,6 +9,7 @@ A plugin for Dify that adds memory management using Zep. This helps your AI assi
 1. Install the plugin in your Dify workspace
 2. Create a Zep project and get an API key
 3. Add your Zep API key to authorize the plugin
+4. (Optional) Use the `zep_api_url` field to define a custom base URL for the API if you are using a different Zep instance.
 
    ![authorize-1](_assets/authorize-1.png)
    ![authorize-2](_assets/authorize-2.png)

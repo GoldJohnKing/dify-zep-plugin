@@ -13,7 +13,10 @@ class SearchUserGraphTool(Tool):
         try:
             api_key = self.runtime.credentials["zep_api_key"]
 
-            client = Zep(api_key=api_key)
+            api_url = self.runtime.credentials.get("zep_api_url")
+            base_url = f"{api_url}/api/v2" if api_url else None
+
+            client = Zep(api_key=api_key, base_url=base_url)
 
             graph_edges = client.graph.search(
                 user_id=tool_parameters["user_id"],
