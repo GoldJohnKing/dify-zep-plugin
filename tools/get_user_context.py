@@ -6,9 +6,10 @@ from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
 
 from zep_cloud.client import Zep
+from zep_cloud.errors import NotFoundError
 
 
-class GetSessionMemoryTool(Tool):
+class GetUserContext(Tool):
     def _invoke(self, tool_parameters: dict[str, Any]) -> Generator[ToolInvokeMessage]:
         try:
             api_key = self.runtime.credentials["zep_api_key"]
@@ -16,28 +17,26 @@ class GetSessionMemoryTool(Tool):
             base_url = f"{api_url}/api/v2" if api_url else None
             client = Zep(api_key=api_key, base_url=base_url)
 
-            lastn = tool_parameters.get("lastn")
-            if isinstance(lastn, str) and lastn.isdigit():
-                lastn = int(lastn)
+            mode = tool_parameters.get("mode")
 
             min_rating = tool_parameters.get("min_rating")
-            if isinstance(min_rating, str):
-                try:
-                    min_rating = float(min_rating)
-                except ValueError:
-                    min_rating = None
+            if min_rating and not 0 <= min_rating <= 1:
+                raise Exception("\"min_rating\" exceeds valid range [0, 1]")
 
-            memory = client.memory.get(
-                session_id=tool_parameters["session_id"],
-                lastn=lastn,
-                min_rating=min_rating,
-            )
+            try:
+                context = client.thread.get_user_context(
+                    thread_id=tool_parameters["thread_id"],
+                    min_rating=min_rating,
+                    mode=mode,
+                )
+            except NotFoundError:
+                raise Exception("Thread does not exist")
 
+            yield self.create_text_message(context.context)
             yield self.create_json_message(
-                {"status": "success", "memory": json.loads(memory.json())}
+                {"status": "success", "context": json.loads(context.json())}
             )
-            yield self.create_text_message(memory.context or "")
+
         except Exception as e:
             err = str(e)
             yield self.create_json_message({"status": "error", "error": err})
-            yield self.create_text_message(f"failed to retrieve memory: {err}")

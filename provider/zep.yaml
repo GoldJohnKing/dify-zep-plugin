@@ -1,6 +1,6 @@
 identity:
-  author: obadakhalili
   name: zep
+  author: Obada Khalili, Lucas Hillesheim, GoldJohnKing
   label:
     en_US: Zep
   description:
@@ -31,8 +31,12 @@ credentials_for_provider:
       en_US: Override the Zep API base URL if needed
 
 tools:
-  - tools/init_session.yaml
-  - tools/get_session_memory.yaml
+  - tools/get_user.yaml
+  - tools/add_user.yaml
+  - tools/update_user.yaml
+  - tools/delete_user.yaml
+  - tools/start_thread.yaml
+  - tools/get_user_context.yaml
   - tools/add_session_memory.yaml
   - tools/search_user_graph.yaml
   - tools/delete_session.yaml

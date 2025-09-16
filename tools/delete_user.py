@@ -6,10 +6,10 @@ from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
 
 from zep_cloud.client import Zep
-from zep_cloud.errors import BadRequestError
+from zep_cloud import NotFoundError
 
 
-class InitSessionTool(Tool):
+class DeleteUserTool(Tool):
     def _invoke(self, tool_parameters: dict[str, Any]) -> Generator[ToolInvokeMessage]:
         try:
             api_key = self.runtime.credentials["zep_api_key"]
@@ -18,19 +18,18 @@ class InitSessionTool(Tool):
             client = Zep(api_key=api_key, base_url=base_url)
 
             try:
-                session = client.memory.add_session(
+                delete = client.user.delete(
                     user_id=tool_parameters["user_id"],
-                    session_id=tool_parameters["session_id"],
                 )
-            except BadRequestError:
-                # session exists already
-                session = client.memory.get_session(
-                    session_id=tool_parameters["session_id"]
-                )
+            except NotFoundError:
+                # user does not exist
+                raise Exception("User does not exist")
 
+            yield self.create_text_message(delete.json())
             yield self.create_json_message(
-                {"status": "success", "session": json.loads(session.json())}
+                {"status": "success", "delete": json.loads(delete.json())}
             )
+
         except Exception as e:
             err = str(e)
             yield self.create_json_message({"status": "error", "error": err})

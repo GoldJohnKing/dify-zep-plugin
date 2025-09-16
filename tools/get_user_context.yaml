@@ -1,0 +1,50 @@
+identity:
+  name: get_user_context
+  author: GoldJohnKing
+  label:
+    en_US: Get user context
+
+description:
+  human:
+    en_US: Returns most relevant context from the user graph (including memory from any/all past threads) based on the content of the past few messages of the given thread.
+  llm: Returns most relevant context from the user graph (including memory from any/all past threads) based on the content of the past few messages of the given thread.
+
+parameters:
+  - name: thread_id
+    type: string
+    required: true
+    label:
+      en_US: Thread ID
+    human_description:
+      en_US: The ID of the current thread (for which context is being retrieved).
+    llm_description: The ID of the current thread (for which context is being retrieved).
+    form: llm
+  - name: min_rating
+    type: number
+    required: false
+    label:
+      en_US: Minimum Rating
+    human_description:
+      en_US: The minimum rating by which to filter relevant facts.
+    llm_description: The minimum rating by which to filter relevant facts.
+    form: llm
+  - name: mode
+    type: select
+    options:
+      - value: summary
+        label:
+          en_US: Summary
+      - value: basic
+        label:
+          en_US: Basic
+    required: false
+    label:
+      en_US: Mode
+    human_description:
+      en_US: Defaults to summary mode. Use basic for lower latency.
+    llm_description: Defaults to summary mode. Use basic for lower latency.
+    form: llm
+
+extra:
+  python:
+    source: tools/get_user_context.py

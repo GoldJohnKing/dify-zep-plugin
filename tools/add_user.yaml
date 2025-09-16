@@ -1,0 +1,70 @@
+identity:
+  name: add_user
+  author: GoldJohnKing
+  label:
+    en_US: Add User
+
+description:
+  human:
+    en_US: Adds a user.
+  llm: Adds a user.
+
+parameters:
+  - name: user_id
+    type: string
+    required: true
+    label:
+      en_US: User ID
+    human_description:
+      en_US: The unique identifier of the user.
+    llm_description: The unique identifier of the user.
+    form: llm
+  - name: email
+    type: string
+    required: false
+    label:
+      en_US: Email
+    human_description:
+      en_US: The email address of the user.
+    llm_description: The email address of the user.
+    form: llm
+  - name: first_name
+    type: string
+    required: false
+    label:
+      en_US: First Name
+    human_description:
+      en_US: The first name of the user.
+    llm_description: The first name of the user.
+    form: llm
+  - name: last_name
+    type: string
+    required: false
+    label:
+      en_US: Last Name
+    human_description:
+      en_US: The last name of the user.
+    llm_description: The last name of the user.
+    form: llm
+  - name: fact_rating_instruction
+    type: string
+    required: false
+    label:
+      en_US: Fact Rating Instruction
+    human_description:
+      en_US: "Optional instruction to use for fact rating. See: https://help.getzep.com/sdk-reference/user/add#request.body.fact_rating_instruction"
+    llm_description: Optional instruction to use for fact rating.
+    form: llm
+  - name: metadata
+    type: string
+    required: false
+    label:
+      en_US: Metadata
+    human_description:
+      en_US: "The metadata associated with the user. See: https://help.getzep.com/sdk-reference/user/add#request.body.metadata"
+    llm_description: The metadata associated with the user.
+    form: llm
+
+extra:
+  python:
+    source: tools/add_user.py
