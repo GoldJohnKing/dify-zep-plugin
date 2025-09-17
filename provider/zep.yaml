@@ -41,6 +41,9 @@ tools:
   - tools/search_user_graph.yaml
   - tools/delete_session.yaml
   - tools/get_session.yaml
+  - tools/get_threads.yaml
+  - tools/get_messages.yaml
+  - tools/get_users.yaml
 
 extra:
   python:

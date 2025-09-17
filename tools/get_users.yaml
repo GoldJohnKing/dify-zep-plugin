@@ -1,0 +1,34 @@
+identity:
+  name: get_users
+  author: GoldJohnKing
+  label:
+    en_US: Get Users
+
+description:
+  human:
+    en_US: Returns all users.
+  llm: Returns all users.
+
+parameters:
+  - name: page_number
+    type: number
+    required: false
+    label:
+      en_US: Page Number
+    human_description:
+      en_US: Page number for pagination, starting from 1.
+    llm_description: Page number for pagination, starting from 1.
+    form: llm
+  - name: page_size
+    type: number
+    required: false
+    label:
+      en_US: Page Size
+    human_description:
+      en_US: Number of users to retrieve per page.
+    llm_description: Number of users to retrieve per page.
+    form: llm
+
+extra:
+  python:
+    source: tools/get_users.py
