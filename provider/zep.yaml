@@ -31,21 +31,23 @@ credentials_for_provider:
       en_US: Override the Zep API base URL if needed
 
 tools:
-  - tools/get_user.yaml
-  - tools/add_user.yaml
-  - tools/update_user.yaml
-  - tools/delete_user.yaml
-  - tools/start_thread.yaml
-  - tools/get_user_context.yaml
-  - tools/add_message.yaml
-  - tools/search_user_graph.yaml
-  - tools/delete_session.yaml
+  # Thread
   - tools/get_threads.yaml
+  - tools/start_thread.yaml
+  - tools/delete_thread.yaml
+  - tools/get_user_context.yaml
   - tools/get_messages.yaml
+  - tools/add_message.yaml
+  # TODO: Add messages, Add messages in batch
+  # User
+  - tools/add_user.yaml
   - tools/get_users.yaml
+  - tools/get_user.yaml
+  - tools/delete_user.yaml
+  - tools/update_user.yaml
+#  - tools/get_user_node.yaml
   - tools/get_user_threads.yaml
-# - tools/add_thread_messages_batch.yaml
-# - tools/get_user_node.yaml
+#  - tools/search_user_graph.yaml
 
 extra:
   python:

@@ -1,13 +1,15 @@
 from collections.abc import Generator
 from typing import Any
+import json
 
 from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
 
 from zep_cloud.client import Zep
+from zep_cloud import NotFoundError
 
 
-class DeleteSessionTool(Tool):
+class DeleteThreadTool(Tool):
     def _invoke(self, tool_parameters: dict[str, Any]) -> Generator[ToolInvokeMessage]:
         try:
             api_key = self.runtime.credentials["zep_api_key"]
@@ -15,9 +17,13 @@ class DeleteSessionTool(Tool):
             base_url = f"{api_url}/api/v2" if api_url else None
             client = Zep(api_key=api_key, base_url=base_url)
 
-            client.memory.delete(session_id=tool_parameters["session_id"])
+            response = client.thread.delete(
+                thread_id=tool_parameters["thread_id"]
+            )
 
-            yield self.create_json_message({"status": "success"})
-        except Exception as e:  # pragma: no cover - simple passthrough
+            yield self.create_json_message(
+                {"status": "success", "response": json.loads(response.json())}
+            )
+        except Exception as e:
             err = str(e)
             yield self.create_json_message({"status": "error", "error": err})

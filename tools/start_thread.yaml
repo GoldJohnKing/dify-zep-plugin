@@ -2,7 +2,7 @@ identity:
   name: start_thread
   author: GoldJohnKing
   label:
-    en_US: Start a new thread
+    en_US: Start Thread
 
 description:
   human:

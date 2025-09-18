@@ -2,7 +2,7 @@ identity:
   name: get_user_context
   author: GoldJohnKing
   label:
-    en_US: Get user context
+    en_US: Get User Context
 
 description:
   human:
