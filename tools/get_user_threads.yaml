@@ -1,0 +1,25 @@
+identity:
+  name: get_user_threads
+  author: GoldJohnKing
+  label:
+    en_US: Get User Threads
+
+description:
+  human:
+    en_US: Returns all threads for a user.
+  llm: Returns all threads for a user.
+
+parameters:
+  - name: user_id
+    type: string
+    required: true
+    label:
+      en_US: User ID
+    human_description:
+      en_US: The ID of the user whose threads you want to retrieve.
+    llm_description: The ID of the user whose threads you want to retrieve.
+    form: llm
+
+extra:
+  python:
+    source: tools/get_user_threads.py

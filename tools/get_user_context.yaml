@@ -30,6 +30,7 @@ parameters:
     form: llm
   - name: mode
     type: select
+    required: false
     options:
       - value: summary
         label:
@@ -37,7 +38,6 @@ parameters:
       - value: basic
         label:
           en_US: Basic
-    required: false
     label:
       en_US: Mode
     human_description:

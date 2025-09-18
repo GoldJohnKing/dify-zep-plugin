@@ -16,15 +16,16 @@ class GetThreadsTool(Tool):
             base_url = f"{api_url}/api/v2" if api_url else None
             client = Zep(api_key=api_key, base_url=base_url)
 
-            response = client.thread.list_all(
+            threads = client.thread.list_all(
                 page_number=tool_parameters.get("page_number"),
                 page_size=tool_parameters.get("page_size"),
                 order_by=tool_parameters.get("order_by"),
                 asc=tool_parameters.get("asc"),
             )
 
+            yield self.create_text_message(threads.json())
             yield self.create_json_message(
-                {"status": "success", "threads": json.loads(response.json())}
+                {"status": "success", "threads": json.loads(threads.json())}
             )
         except Exception as e:
             err = str(e)

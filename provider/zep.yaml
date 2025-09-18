@@ -37,13 +37,15 @@ tools:
   - tools/delete_user.yaml
   - tools/start_thread.yaml
   - tools/get_user_context.yaml
-  - tools/add_session_memory.yaml
+  - tools/add_message.yaml
   - tools/search_user_graph.yaml
   - tools/delete_session.yaml
-  - tools/get_session.yaml
   - tools/get_threads.yaml
   - tools/get_messages.yaml
   - tools/get_users.yaml
+  - tools/get_user_threads.yaml
+# - tools/add_thread_messages_batch.yaml
+# - tools/get_user_node.yaml
 
 extra:
   python:
