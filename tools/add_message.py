@@ -24,7 +24,7 @@ class AddSessionMemoryTool(Tool):
                 except json.JSONDecodeError:
                     ignore_roles = [r.strip() for r in ignore_roles.split(",") if r.strip()]
 
-            context = client.thread.add_messages(
+            response = client.thread.add_messages(
                 thread_id=tool_parameters["thread_id"],
                 messages=[
                     Message(
@@ -40,10 +40,10 @@ class AddSessionMemoryTool(Tool):
                 return_context=tool_parameters.get("return_context") or None,
             )
 
-            if context.context :
-                yield self.create_text_message(context.context)
+            if response.context :
+                yield self.create_text_message(response.context)
             yield self.create_json_message(
-                {"status": "success", "context": json.loads(context.json())}
+                {"status": "success", "response": json.loads(response.json())}
             )
 
         except Exception as e:

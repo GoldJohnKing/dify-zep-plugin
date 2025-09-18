@@ -6,7 +6,7 @@ from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
 
 from zep_cloud.client import Zep
-from zep_cloud import BadRequestError
+from zep_cloud import BadRequestError, FactRatingInstruction, FactRatingExamples
 
 
 class AddUserTool(Tool):
@@ -17,25 +17,31 @@ class AddUserTool(Tool):
             base_url = f"{api_url}/api/v2" if api_url else None
             client = Zep(api_key=api_key, base_url=base_url)
 
-            fact_rating_instruction = tool_parameters.get("fact_rating_instruction")
-            fact_rating_instruction = json.loads(fact_rating_instruction) if fact_rating_instruction else None
+            fact_rating_examples = FactRatingExamples(
+                high=tool_parameters.get("fact_rating_instruction_example_high") or None,
+                medium=tool_parameters.get("fact_rating_instruction_example_medium") or None,
+                low=tool_parameters.get("fact_rating_instruction_example_low") or None,
+            )
 
             try:
-                user = client.user.add(
+                response = client.user.add(
                     user_id=tool_parameters["user_id"],
                     email=tool_parameters.get("email"),
                     first_name=tool_parameters.get("first_name"),
                     last_name=tool_parameters.get("last_name"),
-                    fact_rating_instruction = fact_rating_instruction,
+                    fact_rating_instruction = FactRatingInstruction(
+                        instruction = tool_parameters.get("fact_rating_instruction_instruction") or None,
+                        examples = fact_rating_examples or None,
+                    ),
                     metadata=tool_parameters.get("metadata"),
                 )
             except BadRequestError:
                 # user already exists
                 raise Exception("User already exists")
 
-            yield self.create_text_message(user.json())
+            yield self.create_text_message(response.json())
             yield self.create_json_message(
-                {"status": "success", "user": json.loads(user.json())}
+                {"status": "success", "response": json.loads(response.json())}
             )
 
         except Exception as e:

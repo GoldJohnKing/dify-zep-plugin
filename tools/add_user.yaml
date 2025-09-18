@@ -46,14 +46,41 @@ parameters:
       en_US: The last name of the user.
     llm_description: The last name of the user.
     form: llm
-  - name: fact_rating_instruction
+  - name: fact_rating_instruction_instruction
     type: string
     required: false
     label:
-      en_US: Fact Rating Instruction
+      en_US: Fact Rating Instruction - Instruction
     human_description:
-      en_US: "Optional instruction to use for fact rating. See: https://help.getzep.com/sdk-reference/user/add#request.body.fact_rating_instruction"
-    llm_description: Optional instruction to use for fact rating.
+      en_US: A string describing how to rate facts as they apply to your application. A trip planning application may use something like "relevancy to planning a trip, the user's preferences when traveling, or the user's travel history."
+    llm_description: A string describing how to rate facts as they apply to your application. A trip planning application may use something like "relevancy to planning a trip, the user's preferences when traveling, or the user's travel history."
+    form: llm
+  - name: fact_rating_instruction_example_high
+    type: string
+    required: false
+    label:
+      en_US: Fact Rating Instruction - High Rating Example
+    human_description:
+      en_US: See https://help.getzep.com/sdk-reference/user/add#request.body.fact_rating_instruction for details.
+    llm_description: See https://help.getzep.com/sdk-reference/user/add#request.body.fact_rating_instruction for details.
+    form: llm
+  - name: fact_rating_instruction_example_medium
+    type: string
+    required: false
+    label:
+      en_US: Fact Rating Instruction - Medium Rating Example
+    human_description:
+      en_US: See https://help.getzep.com/sdk-reference/user/add#request.body.fact_rating_instruction for details.
+    llm_description: See https://help.getzep.com/sdk-reference/user/add#request.body.fact_rating_instruction for details.
+    form: llm
+  - name: fact_rating_instruction_example_low
+    type: string
+    required: false
+    label:
+      en_US: Fact Rating Instruction - Low Rating Example
+    human_description:
+      en_US: See https://help.getzep.com/sdk-reference/user/add#request.body.fact_rating_instruction for details.
+    llm_description: See https://help.getzep.com/sdk-reference/user/add#request.body.fact_rating_instruction for details.
     form: llm
   - name: metadata
     type: string
