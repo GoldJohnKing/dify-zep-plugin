@@ -18,16 +18,16 @@ class DeleteUserTool(Tool):
             client = Zep(api_key=api_key, base_url=base_url)
 
             try:
-                delete = client.user.delete(
+                response = client.user.delete(
                     user_id=tool_parameters["user_id"],
                 )
             except NotFoundError:
                 # user does not exist
                 raise Exception("User does not exist")
 
-            yield self.create_text_message(delete.json())
+            yield self.create_text_message(response.json())
             yield self.create_json_message(
-                {"status": "success", "delete": json.loads(delete.json())}
+                {"status": "success", "response": json.loads(response.json())}
             )
 
         except Exception as e:

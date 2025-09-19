@@ -18,7 +18,7 @@ class StartThreadTool(Tool):
             client = Zep(api_key=api_key, base_url=base_url)
 
             try:
-                thread = client.thread.create(
+                response = client.thread.create(
                     thread_id=tool_parameters["thread_id"],
                     user_id=tool_parameters["user_id"],
                 )
@@ -26,9 +26,9 @@ class StartThreadTool(Tool):
                 # thread already exists
                 raise Exception("Thread already exists")
 
-            yield self.create_text_message(thread.json())
+            yield self.create_text_message(response.json())
             yield self.create_json_message(
-                {"status": "success", "thread": json.loads(thread.json())}
+                {"status": "success", "response": json.loads(response.json())}
             )
 
         except Exception as e:

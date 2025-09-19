@@ -21,7 +21,7 @@ class UpdateUserTool(Tool):
             fact_rating_instruction = json.loads(fact_rating_instruction) if fact_rating_instruction else None
 
             try:
-                user = client.user.update(
+                response = client.user.update(
                     user_id=tool_parameters["user_id"],
                     email=tool_parameters.get("email"),
                     first_name=tool_parameters.get("first_name"),
@@ -33,9 +33,9 @@ class UpdateUserTool(Tool):
                 # user does not exist
                 raise Exception("User does not exist")
 
-            yield self.create_text_message(user.json())
+            yield self.create_text_message(response.json())
             yield self.create_json_message(
-                {"status": "success", "user": json.loads(user.json())}
+                {"status": "success", "response": json.loads(response.json())}
             )
 
         except Exception as e:

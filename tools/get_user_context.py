@@ -24,7 +24,7 @@ class GetUserContext(Tool):
                 raise Exception("\"min_rating\" exceeds valid range [0, 1]")
 
             try:
-                context = client.thread.get_user_context(
+                response = client.thread.get_user_context(
                     thread_id=tool_parameters["thread_id"],
                     min_rating=min_rating,
                     mode=mode,
@@ -32,9 +32,9 @@ class GetUserContext(Tool):
             except NotFoundError:
                 raise Exception("Thread does not exist")
 
-            yield self.create_text_message(context.context)
+            yield self.create_text_message(response.context)
             yield self.create_json_message(
-                {"status": "success", "context": json.loads(context.json())}
+                {"status": "success", "response": json.loads(response.json())}
             )
 
         except Exception as e:

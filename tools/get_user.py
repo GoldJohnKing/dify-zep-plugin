@@ -18,16 +18,16 @@ class GetUserTool(Tool):
             client = Zep(api_key=api_key, base_url=base_url)
 
             try:
-                user = client.user.get(
+                response = client.user.get(
                     user_id=tool_parameters["user_id"],
                 )
             except NotFoundError:
                 # user does not exist
                 raise Exception("User does not exist")
 
-            yield self.create_text_message(user.json())
+            yield self.create_text_message(response.json())
             yield self.create_json_message(
-                {"status": "success", "user": json.loads(user.json())}
+                {"status": "success", "response": json.loads(response.json())}
             )
 
         except Exception as e:

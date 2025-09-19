@@ -23,7 +23,7 @@ class GetUsersTool(Tool):
 
             yield self.create_text_message(response.json())
             yield self.create_json_message(
-                {"status": "success", "users": json.loads(response.json())}
+                {"status": "success", "response": json.loads(response.json())}
             )
         except Exception as e:
             err = str(e)

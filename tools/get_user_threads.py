@@ -17,7 +17,7 @@ class GetUserThreadsTool(Tool):
             base_url = f"{api_url}/api/v2" if api_url else None
             client = Zep(api_key=api_key, base_url=base_url)
 
-            threads = client.user.get_threads(
+            response = client.user.get_threads(
                 user_id=tool_parameters["user_id"],
             )
 
@@ -26,7 +26,7 @@ class GetUserThreadsTool(Tool):
 
             yield self.create_text_message(json.dumps(dict_threads))
             yield self.create_json_message(
-                {"status": "success", "threads": dict_threads}
+                {"status": "success", "response": dict_threads}
             )
         except Exception as e:
             err = str(e)
