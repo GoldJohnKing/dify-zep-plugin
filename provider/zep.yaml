@@ -45,7 +45,7 @@ tools:
   - tools/get_user.yaml
   - tools/delete_user.yaml
   - tools/update_user.yaml
-#  - tools/get_user_node.yaml
+  - tools/get_user_node.yaml
   - tools/get_user_threads.yaml
 #  - tools/search_user_graph.yaml
 

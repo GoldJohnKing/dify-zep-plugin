@@ -1,0 +1,25 @@
+identity:
+  name: get_user_node
+  author: GoldJohnKing
+  label:
+    en_US: Get User Node
+
+description:
+  human:
+    en_US: Returns a user's node.
+  llm: Returns a user's node.
+
+parameters:
+  - name: user_id
+    type: string
+    required: true
+    label:
+      en_US: User ID
+    human_description:
+      en_US: The user_id of the user to get the node for.
+    llm_description: The user_id of the user to get the node for.
+    form: llm
+
+extra:
+  python:
+    source: tools/get_user_node.py
