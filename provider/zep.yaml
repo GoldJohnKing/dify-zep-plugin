@@ -47,7 +47,8 @@ tools:
   - tools/update_user.yaml
   - tools/get_user_node.yaml
   - tools/get_user_threads.yaml
-#  - tools/search_user_graph.yaml
+  # Graph
+  - tools/search_graph.yaml
 
 extra:
   python:
