@@ -1,0 +1,25 @@
+identity:
+  name: delete_thread
+  author: Obada Khalili, GoldJohnKing
+  label:
+    en_US: Delete Thread
+
+description:
+  human:
+    en_US: Deletes a thread.
+  llm: Deletes a thread.
+
+parameters:
+  - name: thread_id
+    type: string
+    required: true
+    label:
+      en_US: Thread ID
+    human_description:
+      en_US: The ID of the thread for which memory should be deleted.
+    llm_description: The ID of the thread for which memory should be deleted.
+    form: llm
+
+extra:
+  python:
+    source: tools/delete_thread.py

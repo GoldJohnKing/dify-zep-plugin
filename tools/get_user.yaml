@@ -1,0 +1,25 @@
+identity:
+  name: get_user
+  author: GoldJohnKing
+  label:
+    en_US: Get User
+
+description:
+  human:
+    en_US: Returns a user.
+  llm: Returns a user.
+
+parameters:
+  - name: user_id
+    type: string
+    required: true
+    label:
+      en_US: User ID
+    human_description:
+      en_US: The user_id of the user to get.
+    llm_description: The user_id of the user to get.
+    form: llm
+
+extra:
+  python:
+    source: tools/get_user.py

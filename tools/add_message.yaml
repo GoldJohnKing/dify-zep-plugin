@@ -1,0 +1,116 @@
+identity:
+  name: add_message
+  author: Obada Khalili, GoldJohnKing
+  label:
+    en_US: Add Message
+
+description:
+  human:
+    en_US: Add a single message to a thread.
+  llm: Add a single message to a thread.
+
+parameters:
+  - name: thread_id
+    type: string
+    required: true
+    label:
+      en_US: Thread ID
+    human_description:
+      en_US: The ID of the thread to which messages should be added.
+    llm_description: The ID of the thread to which messages should be added.
+    form: llm
+  - name: content
+    type: string
+    required: true
+    label:
+      en_US: Content
+    human_description:
+      en_US: The content of the message.
+    llm_description: The content of the message.
+    form: llm
+  - name: role
+    type: select
+    required: true
+    options:
+      - value: norole
+        label:
+          en_US: No Role
+      - value: system
+        label:
+          en_US: System
+      - value: assistant
+        label:
+          en_US: Assistant
+      - value: user
+        label:
+          en_US: User
+      - value: function
+        label:
+          en_US: Function
+      - value: tool
+        label:
+          en_US: Tool
+    label:
+      en_US: Role
+    human_description:
+      en_US: The role of message sender (e.g., “user”, “system”).
+    llm_description: The role of message sender (e.g., “user”, “system”).
+    form: llm
+  - name: created_at
+    type: string
+    required: false
+    label:
+      en_US: Created at
+    human_description:
+      en_US: The timestamp of when the message was created.
+    llm_description: The timestamp of when the message was created.
+    form: llm
+  - name: name
+    type: string
+    required: false
+    label:
+      en_US: Name
+    human_description:
+      en_US: Customizable name of the sender of the message (e.g., “john”, “sales_agent”).
+    llm_description: Customizable name of the sender of the message (e.g., “john”, “sales_agent”).
+    form: llm
+  - name: processed
+    type: boolean
+    required: false
+    label:
+      en_US: Processed
+    human_description:
+      en_US: Whether the message has been processed.
+    llm_description: Whether the message has been processed.
+    form: llm
+  - name: uuid
+    type: string
+    required: false
+    label:
+      en_US: UUID
+    human_description:
+      en_US: The unique identifier of the message.
+    llm_description: The unique identifier of the message.
+    form: llm
+  - name: ignore_roles
+    type: string
+    required: false
+    label:
+      en_US: Ignore Roles
+    human_description:
+      en_US: Optional list of role types to ignore when adding messages to graph memory. The message itself will still be added, retained and used as context for messages that are added to a user's graph.
+    llm_description: Optional list of role types to ignore when adding messages to graph memory. The message itself will still be added, retained and used as context for messages that are added to a user's graph.
+    form: llm
+  - name: return_context
+    type: boolean
+    required: false
+    label:
+      en_US: Return Context
+    human_description:
+      en_US: Optionally return context block relevant to the most recent messages.
+    llm_description: Optionally return context block relevant to the most recent messages.
+    form: llm
+
+extra:
+  python:
+    source: tools/add_message.py

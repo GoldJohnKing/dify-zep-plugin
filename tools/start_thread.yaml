@@ -1,0 +1,34 @@
+identity:
+  name: start_thread
+  author: GoldJohnKing
+  label:
+    en_US: Start Thread
+
+description:
+  human:
+    en_US: Start a new thread.
+  llm: Start a new thread.
+
+parameters:
+  - name: thread_id
+    type: string
+    required: true
+    label:
+      en_US: Thread ID
+    human_description:
+      en_US: The unique identifier of the thread.
+    llm_description: The unique identifier of the thread.
+    form: llm
+  - name: user_id
+    type: string
+    required: true
+    label:
+      en_US: User ID
+    human_description:
+      en_US: The unique identifier of the user associated with the thread.
+    llm_description: The unique identifier of the user associated with the thread.
+    form: llm
+
+extra:
+  python:
+    source: tools/start_thread.py

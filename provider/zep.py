@@ -16,9 +16,8 @@ class ZepProvider(ToolProvider):
 
         try:
             client = Zep(api_key=api_key, base_url=base_url)
-            # Make a lightweight request to verify the API key without assuming
-            # any specific sessions exist.
-            client.memory.list_sessions(page_size=1)
+            # Make a lightweight request to verify the API key without assuming any specific threads exist.
+            client.thread.list_all(page_size=1)
         except ApiError as e:
             if e.status_code == 401:
                 raise ToolProviderCredentialValidationError(str(e)) from e

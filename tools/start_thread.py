@@ -6,9 +6,10 @@ from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
 
 from zep_cloud.client import Zep
+from zep_cloud.errors import BadRequestError
 
 
-class GetSessionTool(Tool):
+class StartThreadTool(Tool):
     def _invoke(self, tool_parameters: dict[str, Any]) -> Generator[ToolInvokeMessage]:
         try:
             api_key = self.runtime.credentials["zep_api_key"]
@@ -16,10 +17,20 @@ class GetSessionTool(Tool):
             base_url = f"{api_url}/api/v2" if api_url else None
             client = Zep(api_key=api_key, base_url=base_url)
 
-            session = client.memory.get_session(session_id=tool_parameters["session_id"])
+            try:
+                response = client.thread.create(
+                    thread_id=tool_parameters["thread_id"],
+                    user_id=tool_parameters["user_id"],
+                )
+            except BadRequestError:
+                # thread already exists
+                raise Exception("Thread already exists")
+
+            yield self.create_text_message(response.json())
             yield self.create_json_message(
-                {"status": "success", "session": json.loads(session.json())}
+                {"status": "success", "response": json.loads(response.json())}
             )
-        except Exception as e:  # pragma: no cover - simple passthrough
+
+        except Exception as e:
             err = str(e)
             yield self.create_json_message({"status": "error", "error": err})

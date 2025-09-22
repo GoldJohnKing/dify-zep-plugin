@@ -1,0 +1,139 @@
+identity:
+  name: search_graph
+  author: GoldJohnKing
+  label:
+    en_US: Search Graph
+
+description:
+  human:
+    en_US: Perform a graph search query.
+  llm: Perform a graph search query.
+
+parameters:
+  - name: query
+    type: string
+    required: true
+    label:
+      en_US: Query
+    human_description:
+      en_US: The string to search for.
+    llm_description: The string to search for.
+    form: llm
+  - name: search_type
+    type: select
+    options:
+      - value: user
+        label:
+          en_US: User
+      - value: graph
+        label:
+          en_US: Graph
+    required: false
+    label:
+      en_US: Search Type
+    human_description:
+      en_US: Search from a user's graph, or a specific graph.
+    llm_description: Search from a user's graph, or a specific graph.
+    form: llm
+  - name: user_id_or_graph_id
+    type: string
+    required: false
+    label:
+      en_US: User ID / Graph ID
+    human_description:
+      en_US: User ID if searching from a user's graph, or Graph ID if searching a specific graph.
+    llm_description: User ID if searching from a user's graph, or Graph ID if searching a specific graph.
+    form: llm
+  - name: reranker
+    type: select
+    options:
+      - value: rrf
+        label:
+          en_US: Reciprocal Rank Fusion
+      - value: mmr
+        label:
+          en_US: Maximal Marginal Relevance
+      - value: node_distance
+        label:
+          en_US: Node Distance
+      - value: episode_mentions
+        label:
+          en_US: Episode Mentions
+      - value: cross_encoder
+        label:
+          en_US: Cross-Encoder
+    required: false
+    label:
+      en_US: Reranker
+    human_description:
+      en_US: Reranking method, defaults to RRF.
+    llm_description: Reranking method, defaults to RRF.
+    form: llm
+  - name: mmr_lambda
+    type: number
+    required: false
+    label:
+      en_US: MMR Lambda
+    human_description:
+      en_US: Weighting for maximal marginal relevance.
+    llm_description: Weighting for maximal marginal relevance.
+    form: llm
+  - name: center_node_uuid
+    type: string
+    required: false
+    label:
+      en_US: Center Node UUID
+    human_description:
+      en_US: Node to rerank around for node distance reranking.
+    llm_description: Node to rerank around for node distance reranking.
+    form: llm
+  - name: bfs_origin_node_uuids
+    type: string
+    required: false
+    label:
+      en_US: BFS Origin Node UUIDs
+    human_description:
+      en_US: List of nodes that are the origins of the BFS searches.
+    llm_description: List of nodes that are the origins of the BFS searches.
+    form: llm
+  - name: min_fact_rating
+    type: number
+    required: false
+    label:
+      en_US: Min Fact Rating
+    human_description:
+      en_US: The minimum rating by which to filter relevant facts.
+    llm_description: The minimum rating by which to filter relevant facts.
+    form: llm
+  - name: limit
+    type: number
+    required: false
+    label:
+      en_US: Limit
+    human_description:
+      en_US: The maximum number of facts to retrieve. Defaults to 10. Limited to 50.
+    llm_description: The maximum number of facts to retrieve. Defaults to 10. Limited to 50.
+    form: llm
+  - name: scope
+    type: select
+    options:
+      - value: edges
+        label:
+          en_US: Edges
+      - value: nodes
+        label:
+          en_US: Nodes
+      - value: episodes
+        label:
+          en_US: Episodes
+    required: false
+    label:
+      en_US: Scope
+    human_description:
+      en_US: The scope to search.
+    llm_description: The scope to search.
+    form: llm
+
+extra:
+  python:
+    source: tools/search_graph.py

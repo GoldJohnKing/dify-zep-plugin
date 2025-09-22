@@ -1,0 +1,25 @@
+identity:
+  name: delete_user
+  author: GoldJohnKing
+  label:
+    en_US: Delete User
+
+description:
+  human:
+    en_US: Deletes a user.
+  llm: Deletes a user.
+
+parameters:
+  - name: user_id
+    type: string
+    required: true
+    label:
+      en_US: User ID
+    human_description:
+      en_US: The user_id of the user to be deleted.
+    llm_description: The user_id of the user to be deleted.
+    form: llm
+
+extra:
+  python:
+    source: tools/delete_user.py

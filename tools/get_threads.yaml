@@ -1,0 +1,65 @@
+identity:
+  name: get_threads
+  author: GoldJohnKing
+  label:
+    en_US: Get Threads
+
+description:
+  human:
+    en_US: Returns all threads.
+  llm: Returns all threads.
+
+parameters:
+  - name: page_number
+    type: number
+    required: false
+    label:
+      en_US: Page Number
+    human_description:
+      en_US: Page number for pagination, starting from 1.
+    llm_description: Page number for pagination, starting from 1.
+    form: llm
+  - name: page_size
+    type: number
+    required: false
+    label:
+      en_US: Page Size
+    human_description:
+      en_US: Number of threads to retrieve per page.
+    llm_description: Number of threads to retrieve per page.
+    form: llm
+  - name: order_by
+    type: select
+    required: false
+    options:
+      - value: created_at
+        label:
+          en_US: created_at
+      - value: updated_at
+        label:
+          en_US: updated_at
+      - value: user_id
+        label:
+          en_US: user_id
+      - value: thread_id
+        label:
+          en_US: thread_id
+    label:
+      en_US: Order By
+    human_description:
+      en_US: Field to order the results by.
+    llm_description: Field to order the results by.
+    form: llm
+  - name: asc
+    type: boolean
+    required: false
+    label:
+      en_US: Ascending
+    human_description:
+      en_US: Order direction. True for ascending, false for descending.
+    llm_description: Order direction. True for ascending, false for descending.
+    form: llm
+
+extra:
+  python:
+    source: tools/get_threads.py

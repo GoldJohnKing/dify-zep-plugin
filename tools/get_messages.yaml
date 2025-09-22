@@ -1,0 +1,52 @@
+identity:
+  name: get_message
+  author: GoldJohnKing
+  label:
+    en_US: Get Messages
+
+description:
+  human:
+    en_US: Returns messages for a thread.
+  llm: Returns messages for a thread.
+
+parameters:
+  - name: thread_id
+    type: string
+    required: true
+    label:
+      en_US: Thread ID
+    human_description:
+      en_US: The ID of the thread to get messages for.
+    llm_description: The ID of the thread to get messages for.
+    form: llm
+  - name: limit
+    type: number
+    required: false
+    label:
+      en_US: Limit
+    human_description:
+      en_US: Limit the number of results returned.
+    llm_description: Limit the number of results returned.
+    form: llm
+  - name: cursor
+    type: number
+    required: false
+    label:
+      en_US: Cursor
+    human_description:
+      en_US: Cursor for pagination.
+    llm_description: Cursor for pagination.
+    form: llm
+  - name: lastn
+    type: number
+    required: false
+    label:
+      en_US: Last N
+    human_description:
+      en_US: Number of most recent messages to return (overrides limit and cursor).
+    llm_description: Number of most recent messages to return (overrides limit and cursor).
+    form: llm
+
+extra:
+  python:
+    source: tools/get_messages.py
